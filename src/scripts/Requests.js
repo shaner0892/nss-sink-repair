@@ -1,22 +1,21 @@
 import { getRequests } from "./dataAccess.js"
 
-//need clarification on what this function is doing
-
-//creates and exports a new function
-export const convertRequestToListElement = () => {
+//creates and exports a new function that prints the list of requests
+export const Requests = () => {
     //invokes the imported function and assigns it to a variable (it's an array of requests)
     const requests = getRequests()
+    const convertRequestToListElement = (request) => {
+        return `
+        <li>
+            ${request.description}
+        </li>
+        `
+    }
     //defines a new variable and prints a list of requests in an unordered list
     let html = `
         <ul>
-            ${requests.map(
-                    (request) => {
-                        return convertRequestToListElement(request)
-                    }
-                ).join("")
-            }
+            ${requests.map(convertRequestToListElement).join("")}
         </ul>
     `
-    
     return html
 }
